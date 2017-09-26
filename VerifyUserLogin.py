@@ -11,17 +11,21 @@ from selenium.webdriver.common import action_chains, keys
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 import unittest
+#from pyvirtualdisplay import Display
 # -*- coding: utf-8 -*-
 
 
 class Verify_Login_And_Saving_Routes(unittest.TestCase):
     def setUp(self):
+        # self.display = Display(visible=0, size=(800, 600))
+        # self.display.start()
         self.driver = webdriver.Chrome()
         print '\n' + "Test for Idaho: Verifying login feature" + '\n'
         self.driver.get("http://hb.511.idaho.gov/")
 
 
     def test_login_route_creation_and_deletion(self):
+
         driver = self.driver
         driver.maximize_window()
 
@@ -31,7 +35,6 @@ class Verify_Login_And_Saving_Routes(unittest.TestCase):
         driver.find_element_by_id('userAccountEmail').send_keys('ryan.kavanaugh@crc-corp.com')
         driver.find_element_by_id('userAccountPassword').send_keys('qa1234')
         driver.find_element_by_id('userAccountPassword').submit()
-        time.sleep(4)
 
         left_Panel_Wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@title="Ryan’s Favorites"]')))
         assert driver.find_element_by_xpath("//*[contains(text(), 'Ryan’s 511')]")
